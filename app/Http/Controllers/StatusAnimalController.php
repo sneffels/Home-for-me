@@ -50,14 +50,21 @@ class StatusAnimalController extends Controller
         $statusanimal->date=$request->input('date');
         $statusanimal->state=$request->input('state');
 
-        //$result=StatusAnimal::where('animal_id','=',$statusanimal->animal_id)
-                        //  ->where('status','=',$statusanimal->status)->first();
+        $result=StatusAnimal::where('animal_id','=',$statusanimal->animal_id)
+            ->where('status','=',$statusanimal->status)->first();
+        if ($result ===null)
+        {
+            StatusAnimal::where('animal_id','=',$statusanimal->animal_id)
+                ->where('state','=',1)->update(['state'=>0]);
+            $statusanimal->save();
+        }
 
 
-        StatusAnimal::where('animal_id','=',$statusanimal->animal_id)
-                              ->where('state','=',1)->update(['state'=>0]);
 
-        $statusanimal->save();
+
+
+
+
 
     }
 

@@ -18,7 +18,7 @@ class UncataloguedAnimalController extends Controller
     public function index()
     {
         $catalogued=StatusAnimal::get()->lists('animal_id');
-        $uncatalogued=Animal::where('arrivalState','<>','Perdido')->whereNotIn('id',$catalogued)->get();
+        $uncatalogued=Animal::where('arrivalState','<>','Perdido')->whereNotIn('id',$catalogued)->orderBy('arrivalDate','desc')->get();
         return $uncatalogued;
     }
 

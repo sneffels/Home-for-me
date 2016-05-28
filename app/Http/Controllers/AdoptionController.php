@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Adoption;
+use Illuminate\Contracts\Logging\Log;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Animal;
+use Illuminate\Http\Response;
 
-class LostAnimalController extends Controller
+class AdoptionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +18,7 @@ class LostAnimalController extends Controller
      */
     public function index()
     {
-        return Animal::where('arrivalState','=','Perdido')->orderBy('arrivalDate','asc')->get();
+        return Adoption::all();
     }
 
     /**
@@ -26,7 +28,7 @@ class LostAnimalController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -37,7 +39,36 @@ class LostAnimalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request,
+            [
+               'names'=>'required',
+                'lastName'=>'required',
+                'idPerson'=>'required',
+                'birthDate'=>'required',
+                'address'=>'required',
+                'housingType'=>'required',
+                'cellPhone'=>'required',
+                'email'=>'required',
+                'docs'=>'required',
+                'animal_id'=>'required'
+
+            ]);
+        $adoption= new Adoption();
+        $adoption->names=$request->input('names');
+
+       $adoption->lastName=$request->input('lastName');
+        $adoption->idPerson=$request->input('idPerson');
+        $adoption->birthDate=$request->input('birthDate');
+        $adoption->address=$request->input('address');
+        $adoption->housingType=$request->input('housingType');
+        $adoption->cellPhone=$request->input('cellPhone');
+        $adoption->email=$request->input('email');
+        $adoption->docs=$request->input('docs');
+        $adoption->animal_id=$request->input('animal_id');
+        $adoption->save();
+
+
     }
 
     /**

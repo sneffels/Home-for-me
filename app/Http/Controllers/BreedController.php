@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Breed;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Animal;
 
-class LostAnimalController extends Controller
+class BreedController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class LostAnimalController extends Controller
      */
     public function index()
     {
-        return Animal::where('arrivalState','=','Perdido')->orderBy('arrivalDate','asc')->get();
+        return Breed::with('species')->get();
     }
 
     /**
@@ -37,7 +37,16 @@ class LostAnimalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,
+            [
+                'description'=>'required',
+                'species_id'=>'required',
+
+            ]);
+        $breed=new Breed();
+        $breed->description=$request->input('description');
+        $breed->species_id=$request->input('species_id');
+        $breed->save();
     }
 
     /**

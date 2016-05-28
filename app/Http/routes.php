@@ -56,3 +56,9 @@ Route::post('/volunteers','VolunteerController@store');
 
 Route::get('/behaviorobs/','BehaviorObservationController@index');
 Route::post('/behaviorobs','BehaviorObservationController@store');
+
+Route::get('/breeds/','BreedController@index');
+Route::post('/breeds','BreedController@store');
+
+Route::get('/adoption/','AdoptionController@index');
+Route::post('/adoption','AdoptionController@store');
