@@ -41,6 +41,8 @@ Route::post('/animalstatus','StatusAnimalController@store');
 Route::get('/lostanimal/','LostAnimalController@index');
 Route::get('/adoptions/','AdoptionsAnimalController@index');
 Route::get('/adopted/','AdoptedAnimalController@index');
+Route::get('/adopted/{id}','AdoptedAnimalController@show');
+
 Route::get('/valoration/','ValorationAnimalController@index');
 
 Route::get('/profileimage/{pname}','ProfileImageController@downloadImage');

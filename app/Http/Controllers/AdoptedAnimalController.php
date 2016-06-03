@@ -19,7 +19,7 @@ class AdoptedAnimalController extends Controller
         $animals=Animal::whereHas('status',function($q)
         {
             $q->where('status','=','Adoptado');
-        })->get();
+        })->with('adoption')->get();
         return $animals;
     }
 
@@ -52,7 +52,8 @@ class AdoptedAnimalController extends Controller
      */
     public function show($id)
     {
-        //
+        return Animal::with('species')->with('breed')->with('adoption')->find($id);
+
     }
 
     /**

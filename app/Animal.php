@@ -21,4 +21,8 @@ class Animal extends Model
     {
         return $this->belongsTo('App\Breed');
     }
+    public function adoption()
+    {
+        return $this->hasOne('App\Adoption');
+    }
 }
